@@ -82,8 +82,8 @@ const App = () => {
   return (
     <div className='text-center my-12'>
       <Toaster />
-      <h1 className='text-3xl mb-4 font-mono font-bold my-4 bg-[#2f103f] w-[70vw] text-white rounded-lg p-4 flex items-center justify-center mx-auto'>
-        <em>CURL Generator</em>
+      <h1 className='text-3xl mb-4 font-mono font-bold my-4 bg-[#2f103f] w-[70vw] text-white shaodw-lg border-2 border-white p-4 flex items-center justify-center mx-auto'>
+        <em>-cURL --generator</em>
       </h1>
       <div className='mb-4'>
         <div hidden={alert} className='text-center'>
@@ -109,7 +109,7 @@ const App = () => {
         <div className='bg-white p-4 rounded-md  inline-flex flex-col shadow-xl'>
           <label className='mb-2 font-semibold'>HTTP Method</label>
           <select
-            className='border rounded-md py-2 px-12 border-gray-500'
+            className='select select-bordered w-80 select-accent border-2 border-[#2f103f]'
             value={request.method}
             onChange={(e) => setRequest({ ...request, method: e.target.value })}
           >
@@ -123,9 +123,11 @@ const App = () => {
       <div>
         <div className='mb-4 bg-white p-4 rounded-md  inline-flex flex-col shadow-xl'>
           <label className='font-semibold mb-2'>URL</label>
+
           <input
-            className='border rounded-lg py-2 px-2 w-64 border-gray-500'
             type='url'
+            placeholder='Type here'
+            className='input w-80 border-2 border-[#2f103f]'
             value={request.url}
             onChange={(e) => setRequest({ ...request, url: e.target.value })}
           />
@@ -135,7 +137,7 @@ const App = () => {
         <div className='mb-4 bg-white p-4 rounded-md  inline-flex flex-col shadow-xl'>
           <label className='font-semibold mb-2'>Body</label>
           <textarea
-            className='border rounded-lg h-60 px-2 py-2 w-72 font-mono border-gray-500'
+            className='rounded-lg h-60 px-2 py-2 w-72 font-mono border-2 border-[#2f103f]'
             value={request.body}
             onChange={(e) => setRequest({ ...request, body: e.target.value })}
           />
@@ -163,10 +165,23 @@ const App = () => {
                 onChange={(e) => handleChangeCustomHeader(e, i)}
               />
               <button
-                className='bg-white hover:shadow-xl h-6 w-6 rounded-full inline-flex items-center justify-center'
+                className='btn btn-circle'
                 onClick={() => removeCustomHeader(i)}
               >
-                <IoIosRemoveCircleOutline className='text-black' />
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-6 w-6'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M6 18L18 6M6 6l12 12'
+                  />
+                </svg>
               </button>
             </div>
           </div>
@@ -175,25 +190,16 @@ const App = () => {
           onClick={addCustomHeader}
           className='flex items-center justify-center text-center'
         >
-          <button className='text-sm flex items-center justify-center text-center bg-[#faf7f5] rounded-md w-56 hover:shadow-xl h-8'>
+          <button className='text-sm flex items-center justify-center text-center bg-[#faf7f5] rounded-md w-56 hover:shadow-xl h-8 border-2 border-[#2f103f]'>
             {' '}
             <IoIosAddCircleOutline className='text-xl mr-2' />
-            <span> Add Custom Header</span>
+            <span>Add Custom Header</span>
           </button>
         </div>
       </div>
       <div className='space-x-2'>
         <label className=' cursor-pointer bg-white p-4 rounded-md  inline-flex flex-col shadow-xl items-center'>
-          <div className='font-semibold'>
-            <span>JSON Content-Type</span>
-            <span
-              className={`font-bold ml-2 ${
-                jsonHeader ? 'text-green-700' : 'text-orange-600'
-              }`}
-            >
-              ({jsonHeader ? 'yes' : 'no'})
-            </span>
-          </div>
+          <div className='font-semibold'>JSON Content-Type</div>
           <input
             type='checkbox'
             className='checkbox'
